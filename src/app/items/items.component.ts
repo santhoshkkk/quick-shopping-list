@@ -7,7 +7,7 @@ import {ShareDialogComponent} from '../share-dialog/share-dialog.component';
 import {Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
-import {NgNavigatorShareService} from 'ng-navigator-share';
+// import {NgNavigatorShareService} from 'ng-navigator-share';
 
 @Component({
   selector: 'app-items',
@@ -16,8 +16,8 @@ import {NgNavigatorShareService} from 'ng-navigator-share';
 })
 export class ItemsComponent implements OnInit, OnDestroy {
 
-  // serverUrl = 'http://localhost:4200?id=';
-  serverUrl = 'https://quickshoppinglist.com?id=';
+  serverUrl = '?id=';
+  // serverUrl = 'https://stavir.com/tools/sharedlist?id=';
 
   id: string;
   newItem: string;
@@ -42,7 +42,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   @ViewChild('cartTable') cartTable: MatTable<any>;
 
   constructor(private shoppingListService: ShoppingListService, private route: ActivatedRoute, private router: Router,
-              private dialog: MatDialog, private ngNavigatorShareService: NgNavigatorShareService) {
+              private dialog: MatDialog/*, private ngNavigatorShareService: NgNavigatorShareService*/) {
     this.newItem = '';
     this.setDefaultPlaceholder();
   }
@@ -132,7 +132,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   doneShopping(): void {
-    alert('Thank you for using Quick shopping list. See you again');
+    alert('Thank you for using Shared List. See you again');
     // TODO revisit
     window.location.href = this.serverUrl;
   }
@@ -149,11 +149,11 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
   // TODO retain the order of items in categorized list
   mailTo(): void {
-    location.href = 'mailto:support@onenzeros.in?subject=Quick Shopping List';
+    location.href = 'mailto:hr@stavir.com?subject=Shared List';
   }
 
   about(): void {
-    location.href = 'https://quickshoppinglist.com/about.html';
+    location.href = 'https://stavir.com/tools/sharedlist/about.html';
   }
 
   help(): void {
@@ -161,26 +161,26 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   policy(): void {
-    location.href = 'https://quickshoppinglist.com/privacypolicy.html';
+    location.href = 'https://stavir.com/tools/sharedlist/privacypolicy.html';
   }
 
   share(): void {
-    try {
-      this.ngNavigatorShareService.share({
-        title: 'Quick Shopping List',
-        text: 'Here is our shopping list. Manage items or use it for shopping.',
-        url: `${this.serverUrl}${this.id}`
-      }).then((val) => console.log('success'), (err) => {
-        console.log('error');
-      });
-    } catch (error) {
-      console.log('You shopping list is not shared, reason: ', error);
-      this.shareDialog();
-    }
+    // try {
+    //   this.ngNavigatorShareService.share({
+    //     title: 'Shared List',
+    //     text: 'Here is our shopping list. Manage items or use it for shopping.',
+    //     url: `${this.serverUrl}${this.id}`
+    //   }).then((val) => console.log('success'), (err) => {
+    //     console.log('error');
+    //   });
+    // } catch (error) {
+    //   console.log('You shopping list is not shared, reason: ', error);
+    //   this.shareDialog();
+    // }
   }
 
   story(): void {
-    location.href = 'https://quickshoppinglist.com/story.html';
+    location.href = 'https://stavir.com/tools/sharedlist/story.html';
   }
 
   private isValidId() {
